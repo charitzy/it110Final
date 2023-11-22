@@ -14,6 +14,7 @@ class AuthController extends Controller
         $fields = $request->validate([
             'first_name' => 'required|string',
             'last_name' => 'required|string',
+            'username' => 'required|string|unique:users,username',
             'email' => 'required|string|unique:users,email',
             'password' => 'required|string'
         ]);
@@ -21,6 +22,7 @@ class AuthController extends Controller
         $user = User::create([
             'first_name' => $fields['first_name'],
             'last_name' => $fields['last_name'],
+            'username' => $fields['username'],
             'email' => $fields['email'],
             'password' => bcrypt($fields['password'])
         ]);
