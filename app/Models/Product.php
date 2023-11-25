@@ -18,6 +18,7 @@ class Product extends Model
         'prod_stock',
         'prod_image',
         'category_id',
+        'user_id',
     ];
 
     // You can add relationships or additional methods here if needed
@@ -29,5 +30,9 @@ class Product extends Model
     public function order()
     {
         return $this->hasMany(Order::class);
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

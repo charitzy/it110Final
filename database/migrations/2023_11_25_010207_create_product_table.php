@@ -1,4 +1,3 @@
-
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -12,12 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('purchase', function (Blueprint $table) {
+        Schema::create('product', function (Blueprint $table) {
             $table->id();
+            $table->string('prod_name');
+            $table->text('prod_description')->nullable();
+            $table->decimal('prod_price', 8, 2);
+            $table->integer('prod_stock');
+            $table->string('prod_image')->nullable();
+            $table->foreignId('category_id')->constrained('category');
             $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('product_id')->constrained('product');
-            $table->foreignId('order_id')->constrained('order');
-            $table->foreignId('orderdetail_id')->constrained('order_detail');
             $table->timestamps();
         });
     }
@@ -27,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('purchase');
+        Schema::dropIfExists('product');
     }
 };

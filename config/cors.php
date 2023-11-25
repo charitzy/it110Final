@@ -19,13 +19,17 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*'],
+    'allowed_origins' => ['*', 'http://localhost:3000', 'https://c0c7-216-247-59-113.ngrok-free.app/hay/public/api',],
 
     'allowed_origins_patterns' => [],
 
-    'allowed_headers' => ['*'],
+    // 'allowed_headers' => ['*'],
+    // 'exposed_headers' => [],
 
-    'exposed_headers' => [],
+    'allowed_headers' => ['*', 'Content-Type', 'Authorization', 'ngrok-skip-browser-warning'],
+
+    'exposed_headers' => ['ngrok-skip-browser-warning'],
+
 
     'max_age' => 0,
 

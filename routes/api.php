@@ -15,8 +15,32 @@ use App\Http\Controllers\OrderDetailController;
 
 
 
-//Registration and Login 
+// Route::get('/', function () {
+//     return response()->json([
+//         'message' => 'Welcome App Api test'
+//     ]);
+// });
+
+
+// Route::middleware('web')->get('/csrf-token', function () {
+//     return response()->json(['csrf_token' => csrf_token()]);
+// });
+
+Route::get('/csrf-token', function (Request $request) {
+    return response()->json(['csrf_token' => csrf_token()]);
+});
+
+Route::get('/', function () {
+    return response()->json([
+        'message' => 'Welcome App Api test'
+    ]);
+});
+
+
 Route::post('/register', [AuthController::class, 'register']);
+
+// //Registration and Login 
+// Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
 

@@ -28,6 +28,7 @@ class ProductController extends Controller
             'prod_stock' => 'required|integer',
             'prod_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'category_id' => 'required|exists:category,id',
+            'user_id' => 'required|exists:users,id',
         ]);
 
         if ($validator->fails()) {
