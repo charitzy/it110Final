@@ -10,7 +10,7 @@ class OrderController extends Controller
 {
     public function index()
     {
-        $order = Order::with('product:id,prod_name', 'user:id,name')->get(['id', 'user_id', 'product_id', 'order_status']);
+        $order = Order::with('product:id,prod_name', 'user:id')->get(['id', 'user_id', 'product_id', 'order_status']);
 
         return response()->json(['order' => $order]);
     }

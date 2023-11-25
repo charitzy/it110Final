@@ -27,7 +27,7 @@ class ProductController extends Controller
             'prod_price' => 'required|numeric',
             'prod_stock' => 'required|integer',
             'prod_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'category_id' => 'required|exists:category,id',
+            'category_id' => 'required|exists:category,id', // Assuming your table name is 'categories'
             'user_id' => 'required|exists:users,id',
         ]);
 
@@ -35,19 +35,21 @@ class ProductController extends Controller
             return response()->json(['error' => $validator->errors()], 400);
         }
 
-        $productData = $request->all();
+        $productData = $request->except('prod_image');
 
         // Handle image upload
         if ($request->hasFile('prod_image')) {
-            $imagePath = $request->file('prod_image')->store('product_images');
-            $productData['prod_image'] = $imagePath;
+            $image = $request->file('prod_image');
+            $imageName = $image->getClientOriginalName();
+            $image->move(public_path('images'), $imageName);
+            $productData['prod_image'] = $imageName;
         }
+
 
         $product = Product::create($productData);
 
         return response()->json(['data' => $product, 'message' => 'Product created successfully'], 201);
     }
-
     /**
      * Display the specified resource.
      */
